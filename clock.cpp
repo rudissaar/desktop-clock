@@ -8,6 +8,11 @@ Clock::Clock(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    setParent(nullptr);
+    setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::SubWindow);
+    setAttribute(Qt::WA_NoSystemBackground, true);
+    setAttribute(Qt::WA_TranslucentBackground, true);
+
     timer = new QTimer(this);
     timer->start(1000);
 
@@ -17,6 +22,17 @@ Clock::Clock(QWidget *parent) :
 Clock::~Clock()
 {
     delete ui;
+}
+
+void Clock::mouseMoveEvent(QMouseEvent *event)
+{
+    move(event->globalX() - coordX, event->globalY() - coordY);
+}
+
+void Clock::mousePressEvent(QMouseEvent *event)
+{
+    coordX = event->x();
+    coordY = event->y();
 }
 
 void Clock::paintEvent(QPaintEvent *)

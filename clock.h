@@ -1,6 +1,7 @@
 #ifndef CLOCK_H
 #define CLOCK_H
 
+#include <QMouseEvent>
 #include <QObject>
 #include <QPainter>
 #include <QTime>
@@ -20,11 +21,16 @@ public:
     explicit Clock(QWidget *parent = nullptr);
     ~Clock();
 
+    virtual void mouseMoveEvent(QMouseEvent *event);
+    virtual void mousePressEvent(QMouseEvent *event);
     virtual void paintEvent(QPaintEvent *event);
 
 private:
     Ui::Clock *ui;
     QTimer *timer;
+
+    int coordX;
+    int coordY;
 
 private slots:
     void timeout();
