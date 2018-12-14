@@ -1,10 +1,13 @@
 #include "clock.h"
 
+#include <QSizePolicy>
+
 Clock::Clock(QWidget *parent) :
     QWidget(parent)
 {
     setParent(nullptr);
 
+    setFixedSize(320, 320);
     setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::SubWindow | Qt::WindowStaysOnBottomHint);
     setAttribute(Qt::WA_NoSystemBackground, true);
     setAttribute(Qt::WA_TranslucentBackground, true);
@@ -67,7 +70,7 @@ void Clock::paintEvent(QPaintEvent *)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
     painter.translate(width() / 2, height() / 2);
-    painter.scale(side / 400.0, side / 400.0);
+    painter.scale(side / 240.0, side / 240.0);
 
     for (int i = 0; i < 60; ++i) {
         if ((i % 5) != 0) {

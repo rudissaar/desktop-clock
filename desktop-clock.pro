@@ -9,11 +9,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-    main.cpp \
-    clock.cpp
+    src/main.cpp \
+    src/clock.cpp
 
 HEADERS += \
-    clock.h
+    src/clock.h
 
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
