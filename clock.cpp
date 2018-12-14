@@ -1,5 +1,4 @@
 #include "clock.h"
-#include <QDebug>
 #include "ui_clock.h"
 
 Clock::Clock(QWidget *parent) :
@@ -7,11 +6,12 @@ Clock::Clock(QWidget *parent) :
     ui(new Ui::Clock)
 {
     ui->setupUi(this);
-
     setParent(nullptr);
-    setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::SubWindow);
+
+    setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::SubWindow | Qt::WindowStaysOnBottomHint);
     setAttribute(Qt::WA_NoSystemBackground, true);
     setAttribute(Qt::WA_TranslucentBackground, true);
+    setAttribute(Qt::WA_ShowWithoutActivating);
 
     timer = new QTimer(this);
     timer->start(1000);
