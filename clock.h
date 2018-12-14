@@ -26,7 +26,6 @@ public:
     virtual void paintEvent(QPaintEvent *event);
 
 private:
-    Ui::Clock *ui;
     QTimer *timer;
 
     int coordX;

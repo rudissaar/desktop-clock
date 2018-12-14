@@ -1,5 +1,4 @@
 #include "clock.h"
-#include <QDebug>
 
 Clock::Clock(QWidget *parent) :
     QWidget(parent)
@@ -71,17 +70,16 @@ void Clock::paintEvent(QPaintEvent *)
     }
 
     QTime time = QTime::currentTime();
-    qDebug() << ((time.hour() * 360) / 12);
 
     painter.save();
-    painter.rotate((time.hour() * 360) / 12);
+    painter.rotate(30.0 * ((time.hour() + time.minute() / 60.0)));
     painter.setPen(Qt::NoPen);
     painter.setBrush(Qt::black);
     painter.drawConvexPolygon(hourHand, 3);
     painter.restore();
 
     painter.save();
-    painter.rotate((time.minute() * 360) / 60);
+    painter.rotate((time.minute() * 360) / 60.0);
     painter.setPen(Qt::NoPen);
     painter.setBrush(Qt::black);
     painter.drawConvexPolygon(minuteHand, 3);
