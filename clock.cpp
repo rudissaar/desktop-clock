@@ -1,11 +1,9 @@
 #include "clock.h"
-#include "ui_clock.h"
+#include <QDebug>
 
 Clock::Clock(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::Clock)
+    QWidget(parent)
 {
-    ui->setupUi(this);
     setParent(nullptr);
 
     setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::SubWindow | Qt::WindowStaysOnBottomHint);
@@ -21,7 +19,7 @@ Clock::Clock(QWidget *parent) :
 
 Clock::~Clock()
 {
-    delete ui;
+
 }
 
 void Clock::mouseMoveEvent(QMouseEvent *event)
@@ -60,7 +58,7 @@ void Clock::paintEvent(QPaintEvent *)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
     painter.translate(width() / 2, height() / 2);
-    painter.scale(side / 220.0, side / 220.0);
+    painter.scale(side / 400.0, side / 400.0);
 
     for (int i = 0; i < 60; ++i) {
         if ((i % 5) != 0) {
@@ -73,6 +71,7 @@ void Clock::paintEvent(QPaintEvent *)
     }
 
     QTime time = QTime::currentTime();
+    qDebug() << ((time.hour() * 360) / 12);
 
     painter.save();
     painter.rotate((time.hour() * 360) / 12);

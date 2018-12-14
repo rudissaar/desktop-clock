@@ -5,8 +5,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    Clock w;
-    w.show();
+    Clock clock;
+    clock.show();
 
     return a.exec();
 }
