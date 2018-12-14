@@ -10,9 +10,13 @@ Clock::Clock(QWidget *parent) :
     setAttribute(Qt::WA_TranslucentBackground, true);
     setAttribute(Qt::WA_ShowWithoutActivating);
 
+    actionQuit = new QAction(this);
+    actionQuit->setText(tr("Close"));
+
     timer = new QTimer(this);
     timer->start(1000);
 
+    connect(actionQuit, &QAction::triggered, this, &Clock::quit);
     connect(timer, &QTimer::timeout, this, &Clock::timeout);
 }
 
@@ -28,8 +32,14 @@ void Clock::mouseMoveEvent(QMouseEvent *event)
 
 void Clock::mousePressEvent(QMouseEvent *event)
 {
-    coordX = event->x();
-    coordY = event->y();
+    if (event->button() == Qt::RightButton) {
+        QMenu menu(this);
+        menu.addAction(actionQuit);
+        menu.exec(mapToGlobal(event->localPos().toPoint()));
+    } else if (event->button() == Qt::LeftButton) {
+        coordX = event->x();
+        coordY = event->y();
+    }
 }
 
 void Clock::paintEvent(QPaintEvent *)
@@ -91,6 +101,11 @@ void Clock::paintEvent(QPaintEvent *)
     painter.setBrush(Qt::black);
     painter.drawConvexPolygon(secondHand, 3);
     painter.restore();
+}
+
+void Clock::quit()
+{
+    QCoreApplication::quit();
 }
 
 void Clock::timeout()

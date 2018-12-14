@@ -1,6 +1,9 @@
 #ifndef CLOCK_H
 #define CLOCK_H
 
+#include <QAction>
+#include <QApplication>
+#include <QMenu>
 #include <QMouseEvent>
 #include <QObject>
 #include <QPainter>
@@ -26,12 +29,14 @@ public:
     virtual void paintEvent(QPaintEvent *event);
 
 private:
+    QAction *actionQuit;
     QTimer *timer;
 
     int coordX;
     int coordY;
 
 private slots:
+    void quit();
     void timeout();
 };
 

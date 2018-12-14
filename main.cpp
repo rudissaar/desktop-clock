@@ -1,5 +1,6 @@
-#include "clock.h"
 #include <QApplication>
+
+#include "clock.h"
 
 int main(int argc, char *argv[])
 {
