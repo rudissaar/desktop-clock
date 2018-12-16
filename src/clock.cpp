@@ -1,7 +1,5 @@
 #include "clock.h"
 
-#include <QSizePolicy>
-
 Clock::Clock(QWidget *parent) :
     QWidget(parent)
 {
@@ -13,12 +11,19 @@ Clock::Clock(QWidget *parent) :
     setAttribute(Qt::WA_TranslucentBackground, true);
     setAttribute(Qt::WA_ShowWithoutActivating);
 
+    locked = false;
+
+    actionToggleLocked = new QAction(this);
+    actionToggleLocked->setCheckable(true);
+    actionToggleLocked->setText(tr("Locked"));
+
     actionQuit = new QAction(this);
     actionQuit->setText(tr("Close"));
 
     timer = new QTimer(this);
     timer->start(1000);
 
+    connect(actionToggleLocked, &QAction::toggled, this, &Clock::setLocked);
     connect(actionQuit, &QAction::triggered, this, &Clock::quit);
     connect(timer, &QTimer::timeout, this, &Clock::timeout);
 }
@@ -30,16 +35,19 @@ Clock::~Clock()
 
 void Clock::mouseMoveEvent(QMouseEvent *event)
 {
-    move(event->globalX() - coordX, event->globalY() - coordY);
+    if (!locked) {
+        move(event->globalX() - coordX, event->globalY() - coordY);
+    }
 }
 
 void Clock::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::RightButton) {
         QMenu menu(this);
+        menu.addAction(actionToggleLocked);
         menu.addAction(actionQuit);
         menu.exec(mapToGlobal(event->localPos().toPoint()));
-    } else if (event->button() == Qt::LeftButton) {
+    } else if (event->button() == Qt::LeftButton && !locked) {
         coordX = event->x();
         coordY = event->y();
     }
@@ -104,6 +112,11 @@ void Clock::paintEvent(QPaintEvent *)
     painter.setBrush(Qt::black);
     painter.drawConvexPolygon(secondHand, 3);
     painter.restore();
+}
+
+void Clock::setLocked(bool lock)
+{
+    locked = lock;
 }
 
 void Clock::quit()

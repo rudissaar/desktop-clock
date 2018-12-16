@@ -29,13 +29,17 @@ public:
     virtual void paintEvent(QPaintEvent *event);
 
 private:
+    QAction *actionToggleLocked;
     QAction *actionQuit;
     QTimer *timer;
+
+    bool locked;
 
     int coordX;
     int coordY;
 
 private slots:
+    void setLocked(bool);
     void quit();
     void timeout();
 };
