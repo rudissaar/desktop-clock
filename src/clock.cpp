@@ -22,6 +22,7 @@ namespace rudissaar
         actionToggleLocked->setText(tr("Locked"));
 
         actionQuit = new QAction(this);
+        actionQuit->setIcon(QPixmap(":icons/res/close.svg"));
         actionQuit->setText(tr("Close"));
 
         timer = new QTimer(this);
