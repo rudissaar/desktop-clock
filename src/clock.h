@@ -36,6 +36,8 @@ namespace rudissaar
         QAction *actionQuit;
         QTimer *timer;
 
+        QColor colour;
+
         bool locked;
 
         int coordX;

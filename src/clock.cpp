@@ -13,6 +13,8 @@ namespace rudissaar
         setAttribute(Qt::WA_TranslucentBackground, true);
         setAttribute(Qt::WA_ShowWithoutActivating);
 
+        colour = Qt::white;
+
         locked = false;
 
         actionToggleLocked = new QAction(this);
@@ -78,6 +80,7 @@ namespace rudissaar
         int side = qMin(width(), height());
 
         QPainter painter(this);
+        painter.setPen(colour);
         painter.setRenderHint(QPainter::Antialiasing);
         painter.translate(width() / 2, height() / 2);
         painter.scale(side / 240.0, side / 240.0);
@@ -97,21 +100,21 @@ namespace rudissaar
         painter.save();
         painter.rotate(30.0 * ((time.hour() + time.minute() / 60.0)));
         painter.setPen(Qt::NoPen);
-        painter.setBrush(Qt::black);
+        painter.setBrush(colour);
         painter.drawConvexPolygon(hourHand, 3);
         painter.restore();
 
         painter.save();
         painter.rotate((time.minute() * 360) / 60.0);
         painter.setPen(Qt::NoPen);
-        painter.setBrush(Qt::black);
+        painter.setBrush(colour);
         painter.drawConvexPolygon(minuteHand, 3);
         painter.restore();
 
         painter.save();
         painter.rotate((time.second() * 360) / 60);
         painter.setPen(Qt::NoPen);
-        painter.setBrush(Qt::black);
+        painter.setBrush(colour);
         painter.drawConvexPolygon(secondHand, 3);
         painter.restore();
     }
