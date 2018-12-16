@@ -11,37 +11,41 @@
 #include <QTimer>
 #include <QWidget>
 
-namespace Ui {
-class Clock;
+namespace Ui
+{
+    class Clock;
 }
 
-class Clock :
-    public QWidget
+namespace rudissaar
 {
-    Q_OBJECT
+    class Clock :
+        public QWidget
+    {
+        Q_OBJECT
 
-public:
-    explicit Clock(QWidget *parent = nullptr);
-    ~Clock();
+    public:
+        explicit Clock(QWidget *parent = nullptr);
+        ~Clock();
 
-    virtual void mouseMoveEvent(QMouseEvent *event);
-    virtual void mousePressEvent(QMouseEvent *event);
-    virtual void paintEvent(QPaintEvent *event);
+        virtual void mouseMoveEvent(QMouseEvent *event);
+        virtual void mousePressEvent(QMouseEvent *event);
+        virtual void paintEvent(QPaintEvent *event);
 
-private:
-    QAction *actionToggleLocked;
-    QAction *actionQuit;
-    QTimer *timer;
+    private:
+        QAction *actionToggleLocked;
+        QAction *actionQuit;
+        QTimer *timer;
 
-    bool locked;
+        bool locked;
 
-    int coordX;
-    int coordY;
+        int coordX;
+        int coordY;
 
-private slots:
-    void setLocked(bool);
-    void quit();
-    void timeout();
-};
+    private slots:
+        void setLocked(bool);
+        void quit();
+        void timeout();
+    };
+}
 
 #endif // CLOCK_H
