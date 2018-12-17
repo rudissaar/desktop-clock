@@ -2,43 +2,17 @@
 
 namespace rudissaar
 {
+    /**
+     * @brief Constructor of Clock object.
+     * @param QWidget *parent
+     */
     Clock::Clock(QWidget *parent) :
         QWidget(parent)
     {
-        setParent(nullptr);
-
-        setFixedSize(320, 320);
-        setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::SubWindow | Qt::WindowStaysOnBottomHint);
-        setAttribute(Qt::WA_NoSystemBackground, true);
-        setAttribute(Qt::WA_TranslucentBackground, true);
-        setAttribute(Qt::WA_ShowWithoutActivating);
-
-        colour = Qt::white;
-        locked = false;
-
-        actionChangeColour = new QAction(this);
-        actionChangeColour->setText(tr("Change colour"));
-
-        actionToggleLocked = new QAction(this);
-        actionToggleLocked->setCheckable(true);
-        actionToggleLocked->setText(tr("Locked"));
-
-        actionQuit = new QAction(this);
-        actionQuit->setIcon(QPixmap(":icons/res/close.svg"));
-        actionQuit->setText(tr("Close"));
-
-        timer = new QTimer(this);
-        timer->start(1000);
-
-        connect(actionChangeColour, &QAction::triggered, this, &Clock::setColour);
-        connect(actionToggleLocked, &QAction::toggled, this, &Clock::setLocked);
-        connect(actionQuit, &QAction::triggered, this, &Clock::quit);
-        connect(timer, &QTimer::timeout, this, &Clock::timeout);
-    }
-
-    Clock::~Clock()
-    {
-
+        setupMeta();
+        setupVariables();
+        setupChildren();
+        setupConnections();
     }
 
     void Clock::mouseMoveEvent(QMouseEvent *event)
@@ -124,9 +98,64 @@ namespace rudissaar
         painter.restore();
     }
 
+    /**
+     * @brief Sets up necessary flags and attributes for Clock object.
+     */
+    void Clock::setupMeta()
+    {
+        setParent(nullptr);
+        setFixedSize(320, 320);
+        setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::SubWindow | Qt::WindowStaysOnBottomHint);
+
+        setAttribute(Qt::WA_NoSystemBackground, true);
+        setAttribute(Qt::WA_TranslucentBackground, true);
+        setAttribute(Qt::WA_ShowWithoutActivating);
+
+    }
+
+    /**
+     * @brief Sets up initial variable values for Clock object.
+     */
+    void Clock::setupVariables()
+    {
+        colour = Qt::white;
+        locked = false;
+    }
+
+    /**
+     * @brief Sets up children/member object for Clock object.
+     */
+    void Clock::setupChildren()
+    {
+        actionChangeColour = new QAction(this);
+        actionChangeColour->setText(tr("Change colour"));
+
+        actionToggleLocked = new QAction(this);
+        actionToggleLocked->setCheckable(true);
+        actionToggleLocked->setText(tr("Locked"));
+
+        actionQuit = new QAction(this);
+        actionQuit->setIcon(QPixmap(":icons/res/close.svg"));
+        actionQuit->setText(tr("Close"));
+
+        timer = new QTimer(this);
+        timer->start(1000);
+    }
+
+    /**
+     * @brief Sets up connections between children/member objects for Clock object.
+     */
+    void Clock::setupConnections()
+    {
+        connect(actionChangeColour, &QAction::triggered, this, &Clock::setColour);
+        connect(actionToggleLocked, &QAction::toggled, this, &Clock::setLocked);
+        connect(actionQuit, &QAction::triggered, this, &Clock::quit);
+        connect(timer, &QTimer::timeout, this, &Clock::timeout);
+    }
+
     void Clock::setColour()
     {
-        colour = QColorDialog::getColor(Qt::white, this);
+        colour = QColorDialog::getColor(colour, this);
     }
 
     void Clock::setLocked(bool lock)

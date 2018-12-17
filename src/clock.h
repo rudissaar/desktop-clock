@@ -26,13 +26,17 @@ namespace rudissaar
 
     public:
         explicit Clock(QWidget *parent = nullptr);
-        ~Clock();
 
         virtual void mouseMoveEvent(QMouseEvent *event);
         virtual void mousePressEvent(QMouseEvent *event);
         virtual void paintEvent(QPaintEvent *event);
 
     private:
+        void setupMeta();
+        void setupVariables();
+        void setupChildren();
+        void setupConnections();
+
         QAction *actionChangeColour;
         QAction *actionToggleLocked;
         QAction *actionQuit;
