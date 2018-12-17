@@ -3,6 +3,7 @@
 
 #include <QAction>
 #include <QApplication>
+#include <QColorDialog>
 #include <QMenu>
 #include <QMouseEvent>
 #include <QObject>
@@ -32,18 +33,19 @@ namespace rudissaar
         virtual void paintEvent(QPaintEvent *event);
 
     private:
+        QAction *actionChangeColour;
         QAction *actionToggleLocked;
         QAction *actionQuit;
         QTimer *timer;
 
         QColor colour;
-
         bool locked;
 
         int coordX;
         int coordY;
 
     private slots:
+        void setColour();
         void setLocked(bool);
         void quit();
         void timeout();

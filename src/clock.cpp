@@ -14,8 +14,10 @@ namespace rudissaar
         setAttribute(Qt::WA_ShowWithoutActivating);
 
         colour = Qt::white;
-
         locked = false;
+
+        actionChangeColour = new QAction(this);
+        actionChangeColour->setText(tr("Change colour"));
 
         actionToggleLocked = new QAction(this);
         actionToggleLocked->setCheckable(true);
@@ -28,6 +30,7 @@ namespace rudissaar
         timer = new QTimer(this);
         timer->start(1000);
 
+        connect(actionChangeColour, &QAction::triggered, this, &Clock::setColour);
         connect(actionToggleLocked, &QAction::toggled, this, &Clock::setLocked);
         connect(actionQuit, &QAction::triggered, this, &Clock::quit);
         connect(timer, &QTimer::timeout, this, &Clock::timeout);
@@ -49,6 +52,7 @@ namespace rudissaar
     {
         if (event->button() == Qt::RightButton) {
             QMenu menu(this);
+            menu.addAction(actionChangeColour);
             menu.addAction(actionToggleLocked);
             menu.addAction(actionQuit);
             menu.exec(mapToGlobal(event->localPos().toPoint()));
@@ -118,6 +122,11 @@ namespace rudissaar
         painter.setBrush(colour);
         painter.drawConvexPolygon(secondHand, 3);
         painter.restore();
+    }
+
+    void Clock::setColour()
+    {
+        colour = QColorDialog::getColor(Qt::white, this);
     }
 
     void Clock::setLocked(bool lock)
