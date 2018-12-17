@@ -103,6 +103,10 @@ namespace rudissaar
      */
     void Clock::setupMeta()
     {
+        QCoreApplication::setOrganizationName("rudissaar");
+        QCoreApplication::setOrganizationDomain("murda.eu");
+        QCoreApplication::setApplicationName("desktop-clock");
+
         setParent(nullptr);
         setFixedSize(320, 320);
         setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::SubWindow | Qt::WindowStaysOnBottomHint);
@@ -118,7 +122,11 @@ namespace rudissaar
      */
     void Clock::setupVariables()
     {
-        colour = Qt::white;
+        QSettings setting;
+
+        QVariant colourData = setting.value("colour");
+        colour = (colourData.isValid()) ? colourData.value<QColor>() : Qt::white;
+
         locked = false;
     }
 
@@ -153,9 +161,19 @@ namespace rudissaar
         connect(timer, &QTimer::timeout, this, &Clock::timeout);
     }
 
+    /**
+     * @brief Sets new colour to clock and saves it your local configuration.
+     */
     void Clock::setColour()
     {
-        colour = QColorDialog::getColor(colour, this);
+        QColor newColour = QColorDialog::getColor(colour, this);
+
+        if (newColour.isValid()) {
+            colour = newColour;
+
+            QSettings setting;
+            setting.setValue("colour", colour);
+        }
     }
 
     void Clock::setLocked(bool lock)

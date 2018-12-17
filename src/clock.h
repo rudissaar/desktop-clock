@@ -8,6 +8,7 @@
 #include <QMouseEvent>
 #include <QObject>
 #include <QPainter>
+#include <QSettings>
 #include <QTime>
 #include <QTimer>
 #include <QWidget>
