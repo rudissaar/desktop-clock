@@ -1,1 +1,5 @@
 *.pro.user*
+
+/installer/*.exe
+/installer/packages/*/data/*
+!/installer/packages/*/data/.gitkeep
