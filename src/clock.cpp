@@ -15,6 +15,10 @@ namespace rudissaar
         setupConnections();
     }
 
+    /**
+     * @brief Function that get triggered on mouse move event.
+     * @param QMouseEvent *event
+     */
     void Clock::mouseMoveEvent(QMouseEvent *event)
     {
         if (!locked) {
@@ -22,6 +26,10 @@ namespace rudissaar
         }
     }
 
+    /**
+     * @brief Function that get triggered on mouse press event.
+     * @param QMouseEvent *event
+     */
     void Clock::mousePressEvent(QMouseEvent *event)
     {
         if (event->button() == Qt::RightButton) {
@@ -36,6 +44,9 @@ namespace rudissaar
         }
     }
 
+    /**
+     * @brief Function that actually draws visual parts of clock.
+     */
     void Clock::paintEvent(QPaintEvent *)
     {
         static const QPoint hourHand[3] = {
@@ -114,7 +125,6 @@ namespace rudissaar
         setAttribute(Qt::WA_NoSystemBackground, true);
         setAttribute(Qt::WA_TranslucentBackground, true);
         setAttribute(Qt::WA_ShowWithoutActivating);
-
     }
 
     /**
@@ -176,16 +186,26 @@ namespace rudissaar
         }
     }
 
+    /**
+     * @brief Sets value for private locked property.
+     * @param bool lock
+     */
     void Clock::setLocked(bool lock)
     {
         locked = lock;
     }
 
+    /**
+     * @brief Function that closes clock application.
+     */
     void Clock::quit()
     {
         QCoreApplication::quit();
     }
 
+    /**
+     * @brief Function that get's executed after every 1 seconds.
+     */
     void Clock::timeout()
     {
         this->update();
