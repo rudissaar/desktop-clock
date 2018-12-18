@@ -16,7 +16,7 @@ namespace rudissaar
     }
 
     /**
-     * @brief Function that get triggered on mouse move event.
+     * @brief Function that gets triggered on mouse move event.
      * @param QMouseEvent *event
      */
     void Clock::mouseMoveEvent(QMouseEvent *event)
@@ -27,7 +27,7 @@ namespace rudissaar
     }
 
     /**
-     * @brief Function that get triggered on mouse press event.
+     * @brief Function that gets triggered on mouse press event.
      * @param QMouseEvent *event
      */
     void Clock::mousePressEvent(QMouseEvent *event)
@@ -41,6 +41,18 @@ namespace rudissaar
         } else if (event->button() == Qt::LeftButton && !locked) {
             coordX = event->x();
             coordY = event->y();
+        }
+    }
+
+    /**
+     * @brief Function that gets triggered on mouse release event.
+     * QMouseEvent *
+     */
+    void Clock::mouseReleaseEvent(QMouseEvent *)
+    {
+        if (!locked) {
+            QSettings settings;
+            settings.setValue("coords", this->pos());
         }
     }
 
@@ -139,6 +151,11 @@ namespace rudissaar
 
         QVariant lockedData = setting.value("locked");
         locked = (lockedData.isValid()) ? lockedData.toBool() : false;
+
+        QVariant coordsData = setting.value("coords");
+        coordX = (coordsData.isValid()) ? coordsData.value<QPoint>().x() : 100;
+        coordY = (coordsData.isValid()) ? coordsData.value<QPoint>().y() : 100;
+        move(coordX, coordY);
     }
 
     /**
