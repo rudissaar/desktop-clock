@@ -137,7 +137,8 @@ namespace rudissaar
         QVariant colourData = setting.value("colour");
         colour = (colourData.isValid()) ? colourData.value<QColor>() : Qt::white;
 
-        locked = false;
+        QVariant lockedData = setting.value("locked");
+        locked = (lockedData.isValid()) ? lockedData.toBool() : false;
     }
 
     /**
@@ -151,6 +152,7 @@ namespace rudissaar
         actionToggleLocked = new QAction(this);
         actionToggleLocked->setCheckable(true);
         actionToggleLocked->setText(tr("Locked"));
+        actionToggleLocked->setChecked(locked);
 
         actionQuit = new QAction(this);
         actionQuit->setIcon(QPixmap(":icons/res/close.svg"));
@@ -193,6 +195,9 @@ namespace rudissaar
     void Clock::setLocked(bool lock)
     {
         locked = lock;
+
+        QSettings setting;
+        setting.setValue("locked", locked);
     }
 
     /**
