@@ -1,5 +1,12 @@
 *.pro.user*
 
+/debug
+/release
+
+/.qmake.stash
+/Makefile
+/Makefile.Debug
+/Makefile.Release
+
 /installer/*.exe
-/installer/packages/*/data/*
-!/installer/packages/*/data/.gitkeep
+/installer/packages/eu.murda.desktopclock/data/*
