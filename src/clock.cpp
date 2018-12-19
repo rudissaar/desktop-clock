@@ -165,6 +165,7 @@ namespace rudissaar
     {
         actionChangeColour = new QAction(this);
         actionChangeColour->setText(tr("Change colour"));
+        actionChangeColour->setIcon(QPixmap(":icons/res/change-colour.svg"));
 
         actionToggleLocked = new QAction(this);
         actionToggleLocked->setCheckable(true);

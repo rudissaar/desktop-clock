@@ -3,7 +3,8 @@
     <Name>Desktop Clock</Name>
     <Version>1.0.0</Version>
     <Title>Desktop Clock Installer</Title>
-    <Publisher>rudissaar</Publisher>
+    <Publisher>Kevin Rudissaar</Publisher>
     <StartMenuDir>Desktop Clock</StartMenuDir>
     <TargetDir>@HomeDir@/desktop-clock</TargetDir>
 </Installer>
+
