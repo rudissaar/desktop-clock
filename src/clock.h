@@ -13,49 +13,47 @@
 #include <QTimer>
 #include <QWidget>
 
-namespace Ui
-{
-    class Clock;
+namespace Ui {
+class Clock;
 }
 
-namespace rudissaar
+namespace rudissaar {
+class Clock :
+    public QWidget
 {
-    class Clock :
-        public QWidget
-    {
-        Q_OBJECT
+    Q_OBJECT
 
-    public:
-        explicit Clock(QWidget *parent = nullptr);
+public:
+    explicit Clock(QWidget *parent = nullptr);
 
-        virtual void mouseMoveEvent(QMouseEvent *event);
-        virtual void mousePressEvent(QMouseEvent *event);
-        virtual void mouseReleaseEvent(QMouseEvent *event);
-        virtual void paintEvent(QPaintEvent *event);
+    virtual void mouseMoveEvent(QMouseEvent *event);
+    virtual void mousePressEvent(QMouseEvent *event);
+    virtual void mouseReleaseEvent(QMouseEvent *event);
+    virtual void paintEvent(QPaintEvent *event);
 
-    private:
-        void setupMeta();
-        void setupVariables();
-        void setupChildren();
-        void setupConnections();
+private:
+    void setupMeta();
+    void setupVariables();
+    void setupChildren();
+    void setupConnections();
 
-        QAction *actionChangeColour;
-        QAction *actionToggleLocked;
-        QAction *actionQuit;
-        QTimer *timer;
+    QAction *actionChangeColour;
+    QAction *actionToggleLocked;
+    QAction *actionQuit;
+    QTimer *timer;
 
-        QColor colour;
-        bool locked;
+    QColor colour;
+    bool locked;
 
-        int coordX;
-        int coordY;
+    int coordX;
+    int coordY;
 
-    private slots:
-        void setColour();
-        void setLocked(bool);
-        void quit();
-        void timeout();
-    };
+private slots:
+    void setColour();
+    void setLocked(bool);
+    void quit();
+    void timeout();
+};
 }
 
 #endif // CLOCK_H
