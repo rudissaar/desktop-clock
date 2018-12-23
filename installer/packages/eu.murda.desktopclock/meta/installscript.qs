@@ -16,5 +16,14 @@ Component.prototype.createOperations = function()
             "iconPath=%SystemRoot%/system32/SHELL32.dll",
             "iconId=2",
             "description=Start Desktop Clock");
+
+        component.addOperation(
+            "CreateShortcut",
+            "@TargetDir@/desktop-clock.exe",
+            "@StartMenuDir@/../Startup/Desktop\ Clock.lnk",
+            "workingDirectory=@TargetDir@",
+            "iconPath=%SystemRoot%/system32/SHELL32.dll",
+            "iconId=2",
+            "description=Start Desktop Clock");
     }
 }
