@@ -38,6 +38,8 @@ void Clock::mousePressEvent(QMouseEvent *event)
         menu.addAction(actionQuit);
         menu.exec(mapToGlobal(event->localPos().toPoint()));
     } else if (event->button() == Qt::LeftButton && !locked) {
+        QApplication::setOverrideCursor(Qt::OpenHandCursor);
+
         coordX = event->x();
         coordY = event->y();
     }
@@ -50,6 +52,8 @@ void Clock::mousePressEvent(QMouseEvent *event)
 void Clock::mouseReleaseEvent(QMouseEvent *)
 {
     if (!locked) {
+        QApplication::restoreOverrideCursor();
+
         QSettings settings;
         settings.setValue("coords", this->pos());
     }

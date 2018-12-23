@@ -4,6 +4,7 @@
 #include <QAction>
 #include <QApplication>
 #include <QColorDialog>
+#include <QCursor>
 #include <QMenu>
 #include <QMouseEvent>
 #include <QObject>
