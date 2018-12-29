@@ -3,6 +3,7 @@
 
 #include <QString>
 
+namespace rudissaar {
 class PluginInterface
 {
 public:
@@ -10,7 +11,8 @@ public:
     virtual QString getName();
     virtual void initialize();
 };
+}
 
-Q_DECLARE_INTERFACE(PluginInterface, "eu.murda.desktopclock.PluginInterface")
+Q_DECLARE_INTERFACE(rudissaar::PluginInterface, "eu.murda.desktopclock.PluginInterface")
 
 #endif // PLUGININTERFACE_H

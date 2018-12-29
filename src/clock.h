@@ -16,6 +16,8 @@
 #include <QTimer>
 #include <QWidget>
 
+#include "plugininterface.h"
+
 namespace Ui {
 class Clock;
 }

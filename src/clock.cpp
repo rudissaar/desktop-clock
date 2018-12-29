@@ -1,5 +1,5 @@
 #include "clock.h"
-#include "plugininterface.h"
+
 namespace rudissaar {
 /**
  * @brief Constructor of Clock object.
