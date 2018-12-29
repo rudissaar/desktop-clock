@@ -5,10 +5,12 @@
 #include <QApplication>
 #include <QColorDialog>
 #include <QCursor>
+#include <QDir>
 #include <QMenu>
 #include <QMouseEvent>
 #include <QObject>
 #include <QPainter>
+#include <QPluginLoader>
 #include <QSettings>
 #include <QTime>
 #include <QTimer>
@@ -34,9 +36,12 @@ public:
 
 private:
     void setupMeta();
+    void setupPlugins();
     void setupVariables();
     void setupChildren();
     void setupConnections();
+
+    void loadPlugin(QString filename);
 
     QAction *actionChangeColour;
     QAction *actionToggleLocked;

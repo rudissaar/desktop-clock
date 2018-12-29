@@ -1,5 +1,5 @@
 #include "clock.h"
-
+#include "plugininterface.h"
 namespace rudissaar {
 /**
  * @brief Constructor of Clock object.
@@ -9,6 +9,7 @@ Clock::Clock(QWidget *parent) :
     QWidget(parent)
 {
     setupMeta();
+    setupPlugins();
     setupVariables();
     setupChildren();
     setupConnections();
@@ -143,6 +144,18 @@ void Clock::setupMeta()
 }
 
 /**
+ * @brief Scans for possible plugins and loads them if possible.
+ */
+void Clock::setupPlugins()
+{
+    QDir path(QDir::currentPath() + QDir::separator() + "plugins");
+
+    foreach (QString filename, path.entryList(QDir::Files)) {
+        loadPlugin(path.absolutePath() + QDir::separator() + filename);
+    }
+}
+
+/**
  * @brief Sets up initial variable values for Clock object.
  */
 void Clock::setupVariables()
@@ -192,6 +205,21 @@ void Clock::setupConnections()
     connect(actionToggleLocked, &QAction::toggled, this, &Clock::setLocked);
     connect(actionQuit, &QAction::triggered, this, &Clock::quit);
     connect(timer, &QTimer::timeout, this, &Clock::timeout);
+}
+
+/**
+ * @brief Method that tries to load individual plugin and initialize it.
+ * @param QString filename
+ */
+void Clock::loadPlugin(QString filename)
+{
+    QPluginLoader loader(filename);
+    QObject *possiblePlugin = loader.instance();
+
+    if (possiblePlugin) {
+        PluginInterface *plugin = qobject_cast<PluginInterface *>(possiblePlugin);
+        plugin->initialize();
+    }
 }
 
 /**

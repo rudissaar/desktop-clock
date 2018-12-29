@@ -14,7 +14,8 @@ SOURCES += \
     src/clock.cpp
 
 HEADERS += \
-    src/clock.h
+    src/clock.h \
+    src/plugininterface.h
 
 RESOURCES += \
     res.qrc
