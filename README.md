@@ -2,6 +2,9 @@
 
 Customizable desktop clock widget written in Qt5 framework.
 
+![Desktop Clock screenshot 1](https://img.murda.eu/de/desktop-clock-1.png)
+![Desktop Clock screenshot 2](https://img.murda.eu/de/desktop-clock-2.png)
+
 ## Building Installer with Qt Creator (Windows)
 
 To get started make sure you have all the following requirements and
