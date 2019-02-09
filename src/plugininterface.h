@@ -3,7 +3,7 @@
 
 #include <QString>
 
-namespace rudissaar {
+namespace DesktopClock {
 class PluginInterface
 {
 public:
@@ -13,6 +13,6 @@ public:
 };
 }
 
-Q_DECLARE_INTERFACE(rudissaar::PluginInterface, "eu.murda.desktopclock.PluginInterface")
+Q_DECLARE_INTERFACE(DesktopClock::PluginInterface, "eu.murda.desktopclock.PluginInterface")
 
 #endif // PLUGININTERFACE_H

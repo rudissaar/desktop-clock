@@ -22,7 +22,7 @@ namespace Ui {
 class Clock;
 }
 
-namespace rudissaar {
+namespace DesktopClock {
 class Clock :
     public QWidget
 {

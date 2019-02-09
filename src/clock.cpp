@@ -1,6 +1,6 @@
 #include "clock.h"
 
-namespace rudissaar {
+namespace DesktopClock {
 /**
  * @brief Constructor of Clock object.
  * @param QWidget *parent
