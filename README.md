@@ -17,10 +17,16 @@ after that open desktop-clock project with Qt Creator.
 * Qt Installer Framework 3
 * Git
 
-### Required Submodules
+### Submodules
 
 desktop-clock project uses submodule [itay-grudev/SingleApplication](https://github.com/itay-grudev/SingleApplication)
 to enchant application with singleton implementation.
+
+Make sure that you have pulled all submodules before build phase, you can do this by using command:
+
+```
+git submodule update --init --recursive
+```
 
 ### Build Settings
 
