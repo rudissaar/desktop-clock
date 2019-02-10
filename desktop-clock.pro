@@ -25,7 +25,7 @@ RESOURCES += \
 
 OTHER_FILES += \
     .gitignore \
-    readme.md
+    README.md
 
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin

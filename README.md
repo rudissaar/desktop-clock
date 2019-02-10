@@ -15,6 +15,12 @@ after that open desktop-clock project with Qt Creator.
 * Qt 5
 * Qt Creator
 * Qt Installer Framework 3
+* Git
+
+### Required Submodules
+
+desktop-clock project uses submodule [itay-grudev/SingleApplication](https://github.com/itay-grudev/SingleApplication)
+to enchant application with singleton implementation.
 
 ### Build Settings
 
