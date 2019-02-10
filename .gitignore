@@ -3,6 +3,9 @@
 /debug
 /release
 
+/modules/*
+!/modules/.gitkeep
+
 /.qmake.stash
 /Makefile
 /Makefile.Debug

@@ -1,0 +1,3 @@
+[submodule "modules/singleapplication"]
+	path = modules/singleapplication
+	url = git@github.com:itay-grudev/SingleApplication.git

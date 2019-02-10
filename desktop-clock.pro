@@ -7,6 +7,9 @@ TEMPLATE = app
 DEFINES += QT_DEPRECATED_WARNINGS
 DESTDIR = installer/packages/eu.murda.desktopclock/data
 
+include(modules/singleapplication/singleapplication.pri)
+DEFINES += QAPPLICATION_CLASS=QApplication
+
 CONFIG += c++11
 
 SOURCES += \
@@ -21,6 +24,7 @@ RESOURCES += \
     res.qrc
 
 OTHER_FILES += \
+    .gitignore \
     readme.md
 
 qnx: target.path = /tmp/$${TARGET}/bin
