@@ -2,5 +2,6 @@
     <qresource prefix="/icons">
         <file>res/close.svg</file>
         <file>res/change-colour.svg</file>
+        <file>res/copy.svg</file>
     </qresource>
 </RCC>

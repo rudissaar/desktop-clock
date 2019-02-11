@@ -36,6 +36,9 @@ void Clock::mousePressEvent(QMouseEvent *event)
         QMenu menu(this);
         menu.addAction(actionChangeColour);
         menu.addAction(actionToggleLocked);
+#ifdef Q_OS_WIN
+        menu.addAction(actionCopyCurrentTime);
+#endif
         menu.addAction(actionQuit);
         menu.exec(mapToGlobal(event->localPos().toPoint()));
     } else if (event->button() == Qt::LeftButton && !locked) {
@@ -101,7 +104,7 @@ void Clock::paintEvent(QPaintEvent *)
         painter.rotate(6.0);
     }
 
-    QTime time = QTime::currentTime();
+    time = QTime::currentTime();
 
     painter.save();
     painter.rotate(30.0 * ((time.hour() + time.minute() / 60.0)));
@@ -188,6 +191,12 @@ void Clock::setupChildren()
     actionToggleLocked->setText(tr("Locked"));
     actionToggleLocked->setChecked(locked);
 
+#ifdef Q_OS_WIN
+    actionCopyCurrentTime = new QAction(this);
+    actionCopyCurrentTime->setIcon(QPixmap(":icons/res/copy.svg"));
+    actionCopyCurrentTime->setText(tr("Copy current time"));
+#endif
+
     actionQuit = new QAction(this);
     actionQuit->setIcon(QPixmap(":icons/res/close.svg"));
     actionQuit->setText(tr("Close"));
@@ -203,6 +212,9 @@ void Clock::setupConnections()
 {
     connect(actionChangeColour, &QAction::triggered, this, &Clock::setColour);
     connect(actionToggleLocked, &QAction::toggled, this, &Clock::setLocked);
+#ifdef Q_OS_WIN
+    connect(actionCopyCurrentTime, &QAction::triggered, this, &Clock::copyCurrentTime);
+#endif
     connect(actionQuit, &QAction::triggered, this, &Clock::quit);
     connect(timer, &QTimer::timeout, this, &Clock::timeout);
 }
@@ -237,6 +249,7 @@ void Clock::setColour()
     }
 }
 
+
 /**
  * @brief Sets value for private locked property.
  * @param bool lock
@@ -248,6 +261,17 @@ void Clock::setLocked(bool lock)
     QSettings setting;
     setting.setValue("locked", locked);
 }
+
+#ifdef Q_OS_WIN
+/**
+ * @brief Copies current time into your clipboard's buffer.
+ */
+void Clock::copyCurrentTime()
+{
+    QClipboard *clipboard = QApplication::clipboard();
+    clipboard->setText(time.toString());
+}
+#endif
 
 /**
  * @brief Function that closes clock application.

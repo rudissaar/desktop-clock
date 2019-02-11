@@ -3,6 +3,9 @@
 
 #include <QAction>
 #include <QApplication>
+#ifdef Q_OS_WIN
+#include <QClipboard>
+#endif
 #include <QColorDialog>
 #include <QCursor>
 #include <QDir>
@@ -47,9 +50,13 @@ private:
 
     QAction *actionChangeColour;
     QAction *actionToggleLocked;
+#ifdef Q_OS_WIN
+    QAction *actionCopyCurrentTime;
+#endif
     QAction *actionQuit;
     QTimer *timer;
 
+    QTime time;
     QColor colour;
     bool locked;
 
@@ -59,6 +66,9 @@ private:
 private slots:
     void setColour();
     void setLocked(bool);
+#ifdef Q_OS_WIN
+    void copyCurrentTime();
+#endif
     void quit();
     void timeout();
 };
